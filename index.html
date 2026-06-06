@@ -1,433 +1,121 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Compre Flow | Retail Execution</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #f7f7f7;
-      color: #1f2937;
-    }
-
-    header {
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e5e7eb;
-      z-index: 1000;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #f5a623;
-    }
-
-    .logo img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #374151;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #f5a623;
-    }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #fff8ec, #ffffff);
-      padding-top: 100px;
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      align-items: center;
-      gap: 3rem;
-    }
-
-    .hero-text h1 {
-      font-size: 4rem;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-
-    .highlight {
-      color: #f5a623;
-      transition: all 0.4s ease;
-      display: inline-block;
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: #6b7280;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #f5a623;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 10px 20px rgba(245, 166, 35, 0.25);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      background: #e49511;
-    }
-
-    .hero-image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hero-image img {
-      width: 100%;
-      max-width: 450px;
-      animation: float 4s ease-in-out infinite;
-      filter: drop-shadow(0 15px 30px rgba(245, 166, 35, 0.35));
-    }
-
-    @keyframes float {
-      0%,100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-12px);
-      }
-    }
-
-    section {
-      padding: 100px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-title h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-title p {
-      color: #6b7280;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.7;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 24px;
-      border: 1px solid #f3f4f6;
-      transition: 0.3s;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    }
-
-    .card-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 18px;
-      background: #fff3dd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .card h3 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .card p {
-      color: #6b7280;
-      line-height: 1.7;
-    }
-
-    .stat h3 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .cta {
-      background: linear-gradient(135deg, #f5a623, #ffb84d);
-      border-radius: 32px;
-      color: white;
-      text-align: center;
-      padding: 5rem 2rem;
-    }
-
-    .cta h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .cta p {
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-
-    .cta .btn {
-      background: white;
-      color: #f5a623;
-      box-shadow: none;
-    }
-
-    footer {
-      background: #111827;
-      color: #d1d5db;
-      padding: 3rem 0;
-      margin-top: 5rem;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-weight: bold;
-      color: white;
-    }
-
-    .footer-logo img {
-      width: 50px;
-    }
-
-    @media(max-width: 768px) {
-      .hero-text h1 {
-        font-size: 2.8rem;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .cta h2 {
-        font-size: 2.2rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compre Flow | Retail Execution</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;scroll-behavior:smooth}
+body{background:#f7f7f7;color:#1f2937}
+header{width:100%;position:fixed;top:0;left:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #e5e7eb;z-index:1000}
+.container{width:90%;max-width:1200px;margin:auto}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+.logo{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:bold;color:#f5a623}
+.logo img{width:60px;height:60px;object-fit:contain}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:#374151;font-weight:600;transition:.3s}
+.nav-links a:hover{color:#f5a623}
+.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#fff8ec,#fff);padding-top:100px}
+.hero-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:center;gap:3rem}
+.hero-text h1{font-size:4rem;line-height:1.1;margin-bottom:1rem}
+.highlight{color:#f5a623;transition:all .4s ease;display:inline-block}
+.hero-text p{font-size:1.2rem;line-height:1.7;color:#6b7280;margin-bottom:2rem}
+.btn{display:inline-block;background:#f5a623;color:white;padding:1rem 2rem;border-radius:12px;text-decoration:none;font-weight:bold;transition:.3s;box-shadow:0 10px 20px rgba(245,166,35,.25)}
+.hero-image{display:flex;justify-content:center;align-items:center}
+.hero-image img{width:100%;max-width:450px}
+section{padding:100px 0}
+.section-title{text-align:center;margin-bottom:4rem}
+.section-title h2{font-size:2.8rem;margin-bottom:1rem}
+.section-title p{color:#6b7280;max-width:700px;margin:auto;line-height:1.7}
+.cards,.sales-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.card,.sales-step{background:white;padding:2rem;border-radius:24px;border:1px solid #f3f4f6;box-shadow:0 10px 25px rgba(0,0,0,.04)}
+.card-icon{width:70px;height:70px;border-radius:18px;background:#fff3dd;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem}
+#forca-vendas{background:white}
+.sales-step{text-align:center;position:relative}
+.step-number{position:absolute;top:-15px;left:20px;width:40px;height:40px;border-radius:50%;background:#f5a623;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.sales-icon{font-size:3rem;margin-bottom:1rem}
+.sales-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
+.benefit{background:#fff8ec;padding:1.5rem;border-radius:20px;text-align:center}
+.cta{background:linear-gradient(135deg,#f5a623,#ffb84d);border-radius:32px;color:white;text-align:center;padding:5rem 2rem}
+footer{background:#111827;color:#d1d5db;padding:3rem 0;margin-top:5rem}
+.footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{display:flex;align-items:center;gap:1rem;font-weight:bold;color:white}
+.footer-logo img{width:50px}
+@media(max-width:768px){.hero-text h1{font-size:2.8rem}.nav-links{display:none}}
+</style>
 </head>
 <body>
+<header><div class="container"><nav>
+<div class="logo"><img src="logo.png" alt="Logo"/>Compre Flow</div>
+<ul class="nav-links">
+<li><a href="#sobre">Sobre</a></li>
+<li><a href="#forca-vendas">Força de Vendas</a></li>
+<li><a href="#contato">Contato</a></li>
+</ul>
+</nav></div></header>
 
-  <header>
-    <div class="container">
-      <nav>
-        <div class="logo">
-          <img src="logo.png" alt="Logo" />
-          Compre Flow
-        </div>
+<section class="hero">
+<div class="container hero-content">
+<div class="hero-text">
+<h1><span id="changingText" class="highlight">Execução no Varejo</span><br>Inteligente</h1>
+<p>Gerencie vendas, auditorias, preços e equipes em tempo real.</p>
+<a href="#contato" class="btn">Solicitar Demonstração</a>
+</div>
+<div class="hero-image"><img src="logo.png" alt="Logo Compre Flow"/></div>
+</div>
+</section>
 
-        <ul class="nav-links">
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#funcionalidades">Funcionalidades</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<section id="sobre"><div class="container">
+<div class="section-title"><h2>Plataforma Completa para Gestão Comercial e Inteligência de Mercado</h2></div>
+<div class="cards">
+<div class="card"><div class="card-icon">📸</div><h3>Auditoria de Gôndolas</h3></div>
+<div class="card"><div class="card-icon">📊</div><h3>Dashboard Gerencial em Tempo Real</h3></div>
+<div class="card"><div class="card-icon">📱</div><h3>Aplicativo de Vendas Integrado</h3></div>
+<div class="card"><div class="card-icon">🕸️</div><h3>Crawlers Inteligentes de Preços</h3></div>
+</div></div></section>
 
-  <section class="hero">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <h1>
-          <span id="changingText" class="highlight">Execução no Varejo</span><br>
-          Inteligente
-        </h1>
+<section id="forca-vendas">
+<div class="container">
+<div class="section-title">
+<h2>Força de Vendas Inteligente</h2>
+<p>Venda, sincronização e acompanhamento em tempo real.</p>
+</div>
 
-        <p>
-          Gerencie vendas, auditorias, preços e equipes em tempo real. Automatize operações comerciais e transforme dados em crescimento para sua empresa.
-        </p>
+<div class="sales-flow">
+<div class="sales-step"><div class="step-number">1</div><div class="sales-icon">📱</div><h3>Catálogo Digital</h3><p>Acesso aos produtos e preços.</p></div>
+<div class="sales-step"><div class="step-number">2</div><div class="sales-icon">🛒</div><h3>Venda Realizada</h3><p>Pedidos registrados em campo.</p></div>
+<div class="sales-step"><div class="step-number">3</div><div class="sales-icon">🚀</div><h3>Envio Automático</h3><p>Integração instantânea.</p></div>
+<div class="sales-step"><div class="step-number">4</div><div class="sales-icon">📊</div><h3>Dashboard</h3><p>Gestão em tempo real.</p></div>
+</div>
 
-        <a href="#contato" class="btn">Solicitar Demonstração</a>
-      </div>
+<div class="sales-benefits">
+<div class="benefit">⚡ Tempo Real</div>
+<div class="benefit">🔒 Segurança</div>
+<div class="benefit">📈 Performance</div>
+<div class="benefit">🏢 Multiempresa</div>
+</div>
+</div>
+</section>
 
-      <div class="hero-image">
-        <img src="logo.png" alt="Logo Compre Flow" />
-      </div>
-    </div>
-  </section>
+<section id="contato"><div class="container"><div class="cta">
+<h2>Leve sua execução para outro nível</h2>
+<p>Automatize auditorias e monitore lojas em tempo real.</p>
+<a href="#" class="btn" id="demoButton">Agendar Demonstração</a>
+</div></div></section>
 
-  <section id="sobre">
-    <div class="container">
-      <div class="section-title">
-        <h2>Plataforma Completa para Gestão Comercial e Inteligência de Mercado</h2>
-        <p>
-          Centralize vendas, auditorias, estoque, preços e operações comerciais em uma única plataforma inteligente.
-        </p>
-      </div>
+<footer><div class="container footer-content">
+<div class="footer-logo"><img src="logo.png" alt="Logo"/>Compre Flow</div>
+<p>© 2026 Compre Flow. Todos os direitos reservados.</p>
+</div></footer>
 
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">📸</div>
-          <h3>Auditoria de Gôndolas</h3>
-          <p>
-            Capture imagens das gôndolas e acompanhe a execução das lojas em tempo real.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">📊</div>
-          <h3>Dashboard Gerencial em Tempo Real</h3>
-          <p>
-            Todas as vendas realizadas no aplicativo são transmitidas instantaneamente para o painel gerencial.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">📱</div>
-          <h3>Aplicativo de Vendas Integrado</h3>
-          <p>
-            Equipes realizam vendas pelo aplicativo e todas as informações são sincronizadas instantaneamente com o dashboard gerencial.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🕸️</div>
-          <h3>Crawlers Inteligentes de Preços</h3>
-          <p>
-            Robôs automatizados monitoram preços em sites concorrentes e geram análises estratégicas de competitividade.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato">
-    <div class="container">
-      <div class="cta">
-        <h2>Leve sua execução para outro nível</h2>
-
-        <p>
-          Automatize auditorias, monitore lojas em tempo real e transforme dados em crescimento para sua operação.
-        </p>
-
-        <a href="#" class="btn" id="demoButton">Agendar Demonstração</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container footer-content">
-      <div class="footer-logo">
-        <img src="logo.png" alt="Logo" />
-        Compre Flow
-      </div>
-
-      <p>© 2026 Compre Flow. Todos os direitos reservados.</p>
-    </div>
-  </footer>
-
-  <script>
-    const button = document.getElementById('demoButton');
-    const changingText = document.getElementById('changingText');
-
-    const texts = [
-      'Execução no Varejo',
-      'Inteligência de Preços',
-      'Inteligência de Vendas'
-    ];
-
-    let currentIndex = 0;
-
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % texts.length;
-
-      changingText.style.opacity = 0;
-      changingText.style.transform = 'translateY(10px)';
-
-      setTimeout(() => {
-        changingText.innerText = texts[currentIndex];
-        changingText.style.opacity = 1;
-        changingText.style.transform = 'translateY(0px)';
-      }, 300);
-    }, 2500);
-
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      button.innerText = 'Entraremos em contato 🚀';
-      button.style.transform = 'scale(1.05)';
-
-      setTimeout(() => {
-        button.style.transform = 'scale(1)';
-      }, 200);
-    });
-  </script>
-</body>
-</html>
+<script>
+const button=document.getElementById('demoButton');
+const changingText=document.getElementById('changingText');
+const texts=['Execução no Varejo','Inteligência de Preços','Inteligência de Vendas'];
+let currentIndex=0;
+setInterval(()=>{
+currentIndex=(currentIndex+1)%texts.length;
+changingText.innerText=texts[currentIndex];
+},2500);
+</script>
+</body></html>
